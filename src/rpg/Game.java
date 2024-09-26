@@ -1,13 +1,16 @@
 package rpg;
 
-import rpg.entities.Player;
-import rpg.entities.Enemy;
-import rpg.enums.Stats;
+import RPGmain.src.rpg.entities.Enemy;
+import RPGmain.src.rpg.entities.Player;
+import RPGmain.src.rpg.enums.Stats;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Game extends JFrame {
     private Player player;
@@ -25,10 +28,14 @@ public class Game extends JFrame {
         this.setLayout(new BorderLayout());
 
         /**
-         * Crear jugador y enemigo
+         * Crear jugador
          */
         this.player = new Player("Héroe");
-        this.enemy = new Enemy("Goblin");
+
+        /**
+         * Crear enemigos y seleccionar uno aleatoriamente
+         */
+        this.enemy = selectRandomEnemy();
 
         /**
          * Crear área de texto para mostrar el estado del juego
@@ -45,7 +52,7 @@ public class Game extends JFrame {
         this.add(attackButton, BorderLayout.SOUTH);
 
         /**
-         *Agregar acción al botón de ataque
+         * Agregar acción al botón de ataque
          */
         attackButton.addActionListener(new ActionListener() {
             @Override
@@ -70,6 +77,27 @@ public class Game extends JFrame {
                 }
             }
         });
+
+        /**
+         * Mostrar el estado inicial del juego
+         */
+        printStatus();
+    }
+
+    /**
+     * Selecciona un enemigo aleatoriamente de una lista de 5 enemigos
+     * @return Enemigo seleccionado aleatoriamente
+     */
+    private Enemy selectRandomEnemy() {
+        List<Enemy> enemies = new ArrayList<>();
+        enemies.add(new Enemy("Goblin", 50, 5, 2));
+        enemies.add(new Enemy("Ogro", 80, 10, 4));
+        enemies.add(new Enemy("Dragón Acorazado", 150, 20, 10));
+        enemies.add(new Enemy("Esqueleto Normal", 40, 8, 1));
+        enemies.add(new Enemy("Zombie", 60, 7, 3));
+
+        Random rand = new Random();
+        return enemies.get(rand.nextInt(enemies.size()));
     }
 
     /**
