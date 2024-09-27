@@ -1,5 +1,5 @@
 # Equipo-5-RPG
-GOOD JOB!
+GOOD JOB guys!
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
