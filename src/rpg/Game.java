@@ -1,8 +1,8 @@
 package rpg;
 
-import RPGmain.src.rpg.entities.Enemy;
-import RPGmain.src.rpg.entities.Player;
-import RPGmain.src.rpg.enums.Stats;
+import rpg.entities.Enemy;
+import rpg.entities.Player;
+import rpg.enums.Stats;
 
 import javax.swing.*;
 import java.awt.*;

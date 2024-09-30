@@ -1,6 +1,6 @@
 package rpg.entities;
 
-import RPGmain.src.rpg.enums.Stats;
+import rpg.enums.Stats;
 
 import java.util.HashMap;
 import java.util.Map;
