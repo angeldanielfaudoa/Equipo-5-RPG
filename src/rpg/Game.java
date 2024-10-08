@@ -12,6 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import rpg.inventory.InventoryWindow;
+import rpg.items.Item;
+import rpg.enums.ItemType;
+
+
+
 public class Game extends JFrame {
     private Player player;
     private Enemy enemy;
@@ -113,4 +119,20 @@ public class Game extends JFrame {
         statusArea.append("Nombre: " + enemy.getName() + "\n");
         statusArea.append("HP: " + enemy.getStats().get(Stats.HP) + "/" + enemy.getStats().get(Stats.MAX_HP) + "\n");
     }
+
+
+
+
+        public static void main(String[] args) {
+            // Crear una lista de ítems para mostrar
+            List<Item> items = new ArrayList<>();
+            items.add(new Item("Espada", "Una espada afilada.", 100, ItemType.WEAPON));
+            items.add(new Item("Armadura", "Una armadura resistente.", 200, ItemType.ARMOR));
+            items.add(new Item("Poción", "Una poción de curación.", 50, ItemType.MISC));
+
+            // Mostrar ventana del inventario
+            SwingUtilities.invokeLater(() -> new InventoryWindow(items));
+        }
+
+
 }
