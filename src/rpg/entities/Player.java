@@ -1,57 +1,56 @@
 package rpg.entities;
 
-import rpg.enums.Stats;
-
+import rpg.enums.Stats;  // Importa el enumerado que define las estadísticas del juego.
 import java.util.HashMap;
 import java.util.Map;
 
 public class Player {
-    private String name;
-    private Map<Stats, Integer> stats;
+    private String name;  // Almacena el nombre del jugador.
+    private Map<Stats, Integer> stats;  // Mapa que almacena las estadísticas del jugador donde la clave es del tipo Stats y el valor es un entero.
 
     /**
      * Constructor que inicializa el nombre y las estadísticas del jugador
-     * @param name
+     * @param name Nombre del jugador
      */
     public Player(String name) {
-        this.name = name;
-        this.stats = new HashMap<>();
+        this.name = name;  // Asigna el nombre del jugador.
+        this.stats = new HashMap<>();  // Inicializa el mapa de estadísticas para el jugador.
 
         /**
          * Inicializa las estadísticas del jugador con valores predeterminados
          */
-        this.stats.put(Stats.MAX_HP, 100);
-        this.stats.put(Stats.HP, 100);
-        this.stats.put(Stats.ATTACK, 10);
-        this.stats.put(Stats.DEFENSE, 5);
+        this.stats.put(Stats.MAX_HP, 100);  // Asigna el valor predeterminado para la vida máxima del jugador.
+        this.stats.put(Stats.HP, 100);  // Inicializa los puntos de vida actuales igual a la vida máxima.
+        this.stats.put(Stats.ATTACK, 10);  // Asigna los puntos de ataque predeterminados del jugador.
+        this.stats.put(Stats.DEFENSE, 5);  // Asigna los puntos de defensa predeterminados del jugador.
     }
 
     /**
      * Método para obtener el nombre del jugador
-     * @return
+     * @return El nombre del jugador
      */
     public String getName() {
-        return name;
+        return name;  // Devuelve el nombre del jugador.
     }
 
     /**
      * Método para obtener las estadísticas del jugador
-     * @return
+     * @return Mapa de estadísticas del jugador
      */
     public Map<Stats, Integer> getStats() {
-        return stats;
+        return stats;  // Devuelve el mapa de estadísticas del jugador.
     }
 
     /**
      * Método que verifica si el jugador está vivo
-     * @return
+     * @return Verdadero si el jugador tiene más de 0 puntos de vida, falso en caso contrario
      */
     public boolean isAlive() {
-        return this.stats.get(Stats.HP) > 0;
+        return this.stats.get(Stats.HP) > 0;  // Verifica si los puntos de vida del jugador son mayores que 0.
     }
 
     /**
-    Metodo para atacar a un enemigo
+     * Método para atacar a un enemigo
      */
     public void attack(Enemy enemy) {
         /**
