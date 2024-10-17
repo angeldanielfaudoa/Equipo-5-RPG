@@ -1,5 +1,8 @@
 package rpg;
+package rpg.gui;
 
+
+import javax.swing.JFrame;
 import rpg.entities.Enemy;
 import rpg.entities.Player;
 import rpg.enums.Stats;
@@ -133,6 +136,13 @@ public class Game extends JFrame {
             // Mostrar ventana del inventario
             SwingUtilities.invokeLater(() -> new InventoryWindow(items));
         }
+
+
+
+
+    }
+
+
 
 
 }
