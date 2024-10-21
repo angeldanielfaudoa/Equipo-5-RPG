@@ -1,5 +1,5 @@
 package rpg;
-package rpg.gui;
+
 
 
 import javax.swing.JFrame;
@@ -145,4 +145,4 @@ public class Game extends JFrame {
 
 
 
-}
+
