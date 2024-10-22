@@ -1,5 +1,6 @@
 package rpg.gui;
 
+import rpg.gui.buttons.BaseButton;
 import rpg.gui.panels.BottomPanel;
 import rpg.gui.panels.MiddlePanel;
 import rpg.gui.panels.TopPanel;
@@ -14,6 +15,12 @@ public class MainWindow extends JFrame {
     private JPanel BarraDeEstado;
     private JPanel PanelDeJuego;
     private JPanel BarraDeAccion;
+    private JButton button1;
+    private JButton Tienda;
+    private JButton Inventario;
+    private JButton Atacar;
+    private JButton Skills;
+    private JButton Huir;
     private JDesktopPane desktopPane;
 
     public MainWindow() {
@@ -59,6 +66,13 @@ public class MainWindow extends JFrame {
         BarraDeEstado = new TopPanel();
         PanelDeJuego = new MiddlePanel();
         BarraDeAccion = new BottomPanel();
+        button1 = new BaseButton("Button1");
+        Tienda = new BaseButton("Tienda");
+        Inventario = new BaseButton("Inventario");
+        Atacar = new BaseButton("Atacar");
+        Huir = new BaseButton("Huir");
+        Skills = new BaseButton("Skills");
+
     };
 
 }

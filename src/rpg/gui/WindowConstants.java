@@ -1,5 +1,6 @@
 package rpg.gui;
 
+import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
@@ -9,11 +10,6 @@ public interface WindowConstants {
 
     Dimension WINDOW_SIZE = new Dimension(1280, 720);
     Insets WINDOW_INSETS = new Insets(10, 10, 10, 10);
-    Dimension TOP_DIMENSION =  ;
-    Border EMPTY_BORDER = ;
-    Dimension MIDDLE_DIMENSION = ;
-
-
 
         /**
          * Ancho de la ventana.
