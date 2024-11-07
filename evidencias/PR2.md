@@ -19,8 +19,11 @@ DOCENTE:
 CASTRO MAGAÑA JESUS AURELIO
 
 
-![img_8.png](img_8.png)
 
 Paneles ya con dibujos:
 
 ![img_9.png](img_9.png)
+
+Actualización 
+
+![img_10.png](img_10.png)
