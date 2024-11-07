@@ -22,7 +22,7 @@ public class HoverButtonUI extends BasicButtonUI {
         b.setForeground(Color.WHITE);
         b.setDoubleBuffered(true);
         b.setOpaque(false);
-        b.setBorderPainted(false);
+//b.setBorderPainted(false);
         b.setFocusPainted(false);
         b.setContentAreaFilled(false);
         b.setIconTextGap(5);
