@@ -10,6 +10,7 @@ import java.awt.*;
 public class HoverButtonUI extends BasicButtonUI {
 
     protected int width;
+    protected int dwidth;
     protected int height;
     protected ImageIcon[] parts;
     protected ImageIcon[] partsHover;
@@ -18,7 +19,7 @@ public class HoverButtonUI extends BasicButtonUI {
     protected void installDefaults(AbstractButton b) {
 
         initParts();
-        b.setForeground(Color.BLACK);
+        b.setForeground(Color.WHITE);
         b.setDoubleBuffered(true);
         b.setOpaque(false);
         b.setBorderPainted(false);
@@ -34,7 +35,8 @@ public class HoverButtonUI extends BasicButtonUI {
     @Override
     public Dimension getPreferredSize(JComponent c) {
 
-        return new Dimension(Math.max(width + 54, 84), 48);
+        dwidth=Math.max(width+45, 84);
+        return new Dimension(Math.max(width, 84), 48);
     }
 
     @Override
@@ -57,18 +59,9 @@ public class HoverButtonUI extends BasicButtonUI {
         partsHover = new ImageIcon[3];
         // Agregamos las imágenes a la caché.
         ImageCache.addImage("userLeftSide", "Buttons/Boton.png");
-        ImageCache.addImage("userCenterSide", "Buttons/Boton.png");
-        ImageCache.addImage("userRightSide", "Buttons/Boton.png");
-        ImageCache.addImage("userHoverLeftSide", "Buttons/Boton.png");
-        ImageCache.addImage("userHoverCenterSide", "Buttons/Boton.png");
-        ImageCache.addImage("userHoverRightSide", "Buttons/Boton.png");
         // Obtenemos las imágenes de la caché y las almacenamos en los arreglos correspondientes.
         parts[0] = ImageCache.getImageIcon("userLeftSide");
-        parts[1] = ImageCache.getImageIcon("userCenterSide");
-        parts[2] = ImageCache.getImageIcon("userRightSide");
-        partsHover[0] = ImageCache.getImageIcon("userHoverLeftSide");
-        partsHover[1] = ImageCache.getImageIcon("userHoverCenterSide");
-        partsHover[2] = ImageCache.getImageIcon("userHoverRightSide");
+        partsHover[0]= ImageCache.getImageIcon("userLeftSide");
     }
 
     @Override
@@ -79,18 +72,12 @@ public class HoverButtonUI extends BasicButtonUI {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ImageIcon[] images = button.getModel().isRollover() ? partsHover : parts;
         drawButtonParts(g2d, images);
-        g2d.translate(-width - 27, 0);
         g2d.setColor(Color.WHITE);
         super.paint(g2d, c);
     }
 
     private void drawButtonParts(Graphics2D g2d, ImageIcon[] parts) {
 
-        g2d.drawImage(parts[0].getImage(), 0, 0, null);
-        g2d.translate(27, 0);
-        g2d.drawImage(parts[1].getImage(), 0, 0,
-                width, height, null);
-        g2d.translate(width, 0);
-        g2d.drawImage(parts[2].getImage(), 0, 0, null);
+        g2d.drawImage(parts[0].getImage(), 0,0, dwidth, height, null);
     }
 }

@@ -7,6 +7,9 @@ import rpg.gui.panels.TopPanel;
 
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import static rpg.gui.WindowConstants.WINDOW_SIZE;
 
 public class MainWindow extends JFrame {
@@ -24,11 +27,8 @@ public class MainWindow extends JFrame {
     private JDesktopPane desktopPane;
 
     public MainWindow() {
-        setTitle("RPG Game");
-        setSize(WINDOW_SIZE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(mainPanel);
-        setVisible(true);
+
+        initComponents();
     }
     private void initComponents() {
         // Creamos un DesktopPane para poder agregar los componentes
@@ -61,6 +61,7 @@ public class MainWindow extends JFrame {
     public static void main(String[] args) {
         new MainWindow();
     }
+
     private void createUIComponents() {
         // Creamos el contenido personalizado de la ventana
         BarraDeEstado = new TopPanel();
@@ -72,7 +73,6 @@ public class MainWindow extends JFrame {
         Atacar = new BaseButton("Atacar");
         Huir = new BaseButton("Huir");
         Skills = new BaseButton("Skills");
-
     };
 
 }

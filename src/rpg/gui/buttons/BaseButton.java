@@ -10,10 +10,10 @@ public class BaseButton extends JButton {
 
         setText(text);
         // Agregamos los iconos a la caché de imágenes.
-        setIcon(
-                new ImageIcon(ImageCache.addImage("shopIdle", "Buttons/Boton.png")));
-        setRolloverIcon(
-                new ImageIcon(ImageCache.addImage("shopHover", "Buttons/Boton.png")));
+//        setIcon(
+//                new ImageIcon(ImageCache.addImage("shopIdle", "Buttons/Boton.png")));
+//        setRolloverIcon(
+//                new ImageIcon(ImageCache.addImage("shopHover", "Buttons/Boton.png")));
         // Establecemos el manger de UI.
         setUI(new HoverButtonUI());
     }
