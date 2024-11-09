@@ -18,12 +18,7 @@ GRUPO:
 DOCENTE:
 CASTRO MAGAÑA JESUS AURELIO
 
+Botones, imagen de Personaje 
 
+![img_11.png](img_11.png)
 
-Paneles ya con dibujos:
-
-![img_9.png](img_9.png)
-
-Actualización 
-
-![img_10.png](img_10.png)
