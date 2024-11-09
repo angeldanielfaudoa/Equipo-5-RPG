@@ -29,9 +29,9 @@ public interface WindowConstants {
     Dimension BOTTOM_DIMENSION = new Dimension(WINDOW_WIDTH, BOTTOM_HEIGHT);
     Dimension CORNER_DIMENSION = new Dimension(52, 77);
     Dimension CENTER_DIMENSION = new Dimension(CENTER_WIDTH, 77);
-    Dimension BAR_LABEL = new Dimension(172, 51);
-    Dimension BAR_ICON = new Dimension(40, 30);
-    Dimension BAR_DISPLAY = new Dimension(100, 30);
+    Dimension BAR_LABEL = new Dimension(90, 51);
+    Dimension BAR_ICON = new Dimension(40, 40);
+    Dimension BAR_DISPLAY = new Dimension(70, 58);
     EmptyBorder EMPTY_BORDER = new EmptyBorder(14, SIMPLE_MARGIN,
             SIMPLE_MARGIN, SIMPLE_MARGIN);
 }
