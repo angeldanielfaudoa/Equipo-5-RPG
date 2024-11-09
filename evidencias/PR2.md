@@ -22,3 +22,6 @@ Botones, imagen de Personaje
 
 ![img_11.png](img_11.png)
 
+Barra de Vida 
+
+![img_12.png](img_12.png)
