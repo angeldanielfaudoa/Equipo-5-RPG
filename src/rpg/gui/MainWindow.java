@@ -1,6 +1,8 @@
 package rpg.gui;
 
+import rpg.enums.BarType;
 import rpg.gui.buttons.BaseButton;
+import rpg.gui.labels.BarLabel;
 import rpg.gui.labels.PortraitLabel;
 import rpg.gui.panels.BottomPanel;
 import rpg.gui.panels.MiddlePanel;
@@ -26,6 +28,7 @@ public class MainWindow extends JFrame {
     private JLabel portraitLabel;
     private JButton button2;
     private JButton button3;
+    private JLabel LifeLabel;
 
     public MainWindow() {
         initComponents();
@@ -83,6 +86,10 @@ public class MainWindow extends JFrame {
 
         // Etiqueta adicional
         portraitLabel = new PortraitLabel();
+
+        // Otros componentes de la interfaz
+        LifeLabel = new BarLabel(100, 100, BarType.LIFE);
+
     }
 
     public static void main(String[] args) {
