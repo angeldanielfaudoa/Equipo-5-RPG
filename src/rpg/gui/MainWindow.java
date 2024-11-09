@@ -9,8 +9,6 @@ import rpg.gui.panels.MiddlePanel;
 import rpg.gui.panels.TopPanel;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 
 public class MainWindow extends JFrame {
 
@@ -29,6 +27,8 @@ public class MainWindow extends JFrame {
     private JButton button2;
     private JButton button3;
     private JLabel LifeLabel;
+    private JLabel MagicLabel;
+    private JLabel ExpLabel;
 
     public MainWindow() {
         initComponents();
@@ -87,9 +87,11 @@ public class MainWindow extends JFrame {
         // Etiqueta adicional
         portraitLabel = new PortraitLabel();
 
+
         // Otros componentes de la interfaz
         LifeLabel = new BarLabel(100, 100, BarType.LIFE);
-
+        MagicLabel = new BarLabel(30, 100, BarType.MAGIC);
+        ExpLabel = new BarLabel(0, 350, BarType.EXPERIENCE);
     }
 
     public static void main(String[] args) {
