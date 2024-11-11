@@ -32,7 +32,7 @@ public class BarLabel extends JLabel {
     }
 
     public int getBarValue() {
-        return 0;
+        return barValue;
     }
 
     // Otros métodos de la clase como los getters y setters

@@ -6,6 +6,7 @@ import rpg.gui.WindowConstants;
 import rpg.gui.labels.BarLabel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicLabelUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -71,13 +72,14 @@ public class BarLabelUI extends BasicLabelUI {
         int iconWidth = WindowConstants.BAR_ICON.width;
         int iconHeight = WindowConstants.BAR_ICON.height;
         int displayX = WindowConstants.BAR_ICON.width - 2;
-        int displayY = iconY + 5;
+        int displayY = iconY;
         int displayWidth = WindowConstants.BAR_DISPLAY.width;
         int displayHeight = WindowConstants.BAR_DISPLAY.height;
         int barWidth = (int) ((double) barValue / maxValue * 157);
+        System.out.println(barValue+" "+maxValue+" "+barWidth);
         int barHeight = 17;
-        int barX = iconWidth + 9;
-        int barY = iconY + 15;
+        int barX = iconWidth + 8;
+        int barY = iconY + 10;
         g2d.drawImage(icon, iconX, iconY, iconWidth, iconHeight, null);
         g2d.drawImage(container, displayX, displayY, displayWidth, displayHeight, null);
         g2d.drawImage(bar, barX, barY, barWidth, barHeight, null);
@@ -99,6 +101,6 @@ public class BarLabelUI extends BasicLabelUI {
         Dimension iconSize = WindowConstants.BAR_ICON;
         Dimension displaySize = WindowConstants.BAR_DISPLAY;
         int width = iconSize.width + displaySize.width;
-        return new Dimension(width, iconSize.height + 5);
+        return new Dimension(width, iconSize.height);
     }
 }

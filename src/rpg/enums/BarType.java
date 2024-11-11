@@ -28,10 +28,11 @@ public enum BarType {
             }
             case EXPERIENCE -> {
                 // Se cargan las imágenes para la barra de experiencia
-                container = ImageCache.addImage("exp_container", "bars/experience_container.png");
-                icon = ImageCache.addImage("exp_icon", "bars/experience_icon.png");
-                bar = ImageCache.addImage("exp_bar", "bars/experience_bar.png");
+                container = ImageCache.addImage("exp_container", "bars/exp_container.png");
+                icon = ImageCache.addImage("exp_icon", "bars/exp_icon.png");
+                bar = ImageCache.addImage("exp_bar", "bars/exp_bar.png");
             }
+
         }
     }
 

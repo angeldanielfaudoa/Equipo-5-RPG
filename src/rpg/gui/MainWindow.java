@@ -3,6 +3,8 @@ package rpg.gui;
 import rpg.enums.BarType;
 import rpg.gui.buttons.BaseButton;
 import rpg.gui.labels.BarLabel;
+import rpg.gui.labels.GoldLabel;
+import rpg.gui.labels.NameLabel;
 import rpg.gui.labels.PortraitLabel;
 import rpg.gui.panels.BottomPanel;
 import rpg.gui.panels.MiddlePanel;
@@ -91,7 +93,9 @@ public class MainWindow extends JFrame {
         // Otros componentes de la interfaz
         LifeLabel = new BarLabel(100, 100, BarType.LIFE);
         MagicLabel = new BarLabel(30, 100, BarType.MAGIC);
-        ExpLabel = new BarLabel(0, 350, BarType.EXPERIENCE);
+        ExpLabel = new BarLabel(100, 100, BarType.EXPERIENCE);
+
+
     }
 
     public static void main(String[] args) {
