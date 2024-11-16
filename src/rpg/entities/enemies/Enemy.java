@@ -2,7 +2,10 @@ package rpg.entities.enemies;
 
 import rpg.entities.GameCharacter;
 import rpg.entities.Player;
+import rpg.enums.EnemyType;
 import rpg.enums.Stats;
+
+import javax.swing.*;
 
 public class Enemy extends GameCharacter {
 
@@ -78,4 +81,21 @@ public class Enemy extends GameCharacter {
         return attackPower;
     }
 
+
+    protected EnemyType type;
+
+
+    public abstract ImageIcon getSprite();
+
+    public abstract void getLoot();
+
+    public abstract void attack(GameCharacter enemy);
+
+    public EnemyType getType() {
+        return type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

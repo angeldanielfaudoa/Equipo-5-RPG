@@ -25,6 +25,10 @@ public enum Stats {
     /**
      * Es la función de la velocidad
      */
+    Experience,
+
+    Gold,
+
     SPEED,
     /**
      * Es la función de destreza
@@ -46,6 +50,8 @@ public enum Stats {
      * Función de OPORTUNIDAD DE GOLPE CRÍTICO
      */
     CRITICAL_HIT_CHANCE,
+    EXPERIENCE,
+    GOLD,
     /**
      * Función de daño critico
      */
