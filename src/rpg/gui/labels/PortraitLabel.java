@@ -14,11 +14,6 @@ public class PortraitLabel extends JLabel {
 
     public PortraitLabel() {
         initComponents();
-        setSize(new Dimension(117, 117));
-        setPreferredSize(getSize());
-        setMaximumSize(getSize());
-        setMinimumSize(getSize());
-        initComponents();
         setUI(new GameLabelUI(getPreferredSize(), icon));
     }
 
@@ -27,15 +22,7 @@ public class PortraitLabel extends JLabel {
                 "Personajes/Personaje.png");  // Ruta absoluta añadida
         icon = ImageCache.getImageIcon("portrait");
         setPreferredSize(
-                new Dimension(icon.getIconWidth(),
-                        icon.getIconHeight()));
+                new Dimension(117, 117));
         setIcon(icon);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.drawImage(icon.getImage(), 0, 0, 117, 117, this);
     }
 }

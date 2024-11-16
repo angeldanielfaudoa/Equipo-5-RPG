@@ -15,9 +15,9 @@ public class NameLabelUI extends GameLabelUI {
 
         super(null, null);
         icons = new BufferedImage[3];
-        ImageCache.addImage("name_l", "labels/name_label_left.png");
-        ImageCache.addImage("name_c", "labels/name_label_center.png");
-        ImageCache.addImage("name_r", "labels/name_label_right.png");
+        ImageCache.addImage("name_l", "Labels/name_label_left.png");
+        ImageCache.addImage("name_c", "Labels/name_label_center.png");
+        ImageCache.addImage("name_r", "Labels/name_label_right.png");
         icons[0] = ImageCache.getImage("name_l");
         icons[1] = ImageCache.getImage("name_c");
         icons[2] = ImageCache.getImage("name_r");

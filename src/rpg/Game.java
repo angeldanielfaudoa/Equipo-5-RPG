@@ -1,148 +1,90 @@
 package rpg;
 
-
-
-import javax.swing.JFrame;
-import rpg.entities.Enemy;
+import rpg.entities.GameCharacter;
+import rpg.entities.GameUI;
+import rpg.entities.enemies.Enemy;
 import rpg.entities.Player;
-import rpg.enums.Stats;
+import rpg.entities.enemies.Goblin.Goblin;
+import rpg.entities.enemies.Orc.Orc;
+import rpg.entities.enemies.Dragon.Dragon;
+import rpg.entities.enemies.Troll.Troll;
+import rpg.entities.enemies.Skeleton.Skeleton;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
-import rpg.inventory.InventoryWindow;
-import rpg.items.Item;
-import rpg.enums.ItemType;
+public class Game {
 
-
-
-public class Game extends JFrame {
     private Player player;
     private Enemy enemy;
-    private JTextArea statusArea;
-    private JButton attackButton;
+    private GameUI gameUI;
 
-    public Game() {
+    /**
+     * Agregar constructor del juego
+     * @param player
+     * @param enemy
+     * @param gameUI
+     */
+    public Game(Player player, Enemy enemy, GameUI gameUI) {
+        this.player = player;
+        this.gameUI = gameUI;
         /**
-         * Configurar la ventana
+         * Crear un enemigo aleatorio
          */
-        this.setTitle("Juego de Combate RPG");
-        this.setSize(400, 300);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
+        this.enemy = createRandomEnemy();
+    }
 
-        /**
-         * Crear jugador
-         */
-        this.player = new Player("Héroe");
-
-        /**
-         * Crear enemigos y seleccionar uno aleatoriamente
-         */
-        this.enemy = selectRandomEnemy();
-
-        /**
-         * Crear área de texto para mostrar el estado del juego
-         */
-        statusArea = new JTextArea();
-        statusArea.setEditable(false); // Evitar que el jugador edite el área de texto
-        JScrollPane scrollPane = new JScrollPane(statusArea);
-        this.add(scrollPane, BorderLayout.CENTER);
+    public void startGame() {
+        gameUI.displayMessage("El juego ha comenzado!");
+        gameUI.displayMessage("Tu enemigo es: " + enemy.getName());
 
         /**
-         * Crear botón de ataque
+         * Agregar lógica de combate
          */
-        attackButton = new JButton("Atacar");
-        this.add(attackButton, BorderLayout.SOUTH);
-
-        /**
-         * Agregar acción al botón de ataque
-         */
-        attackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (player.isAlive() && enemy.isAlive()) {
-                    player.attack(enemy);
-                    printStatus();
-
-                    if (enemy.isAlive()) {
-                        enemy.attack(player);
-                        printStatus();
-                    }
-
-                    if (!player.isAlive() || !enemy.isAlive()) {
-                        attackButton.setEnabled(false);
-                        if (player.isAlive()) {
-                            statusArea.append("\n¡Has derrotado al enemigo!");
-                        } else {
-                            statusArea.append("\nFin del juego. El enemigo te ha derrotado.");
-                        }
-                    }
-                }
+        while (player.isAlive() && enemy.isAlive()) {
+            /**
+             * El jugador ataca al enemigo
+             */
+            player.attack(enemy, 34);
+            if (enemy.isAlive()) {
+                /**
+                 * El enemigo contraataca si sigue vivo
+                 */
+                enemy.attack(player);
             }
-        });
-
-        /**
-         * Mostrar el estado inicial del juego
-         */
-        printStatus();
-    }
-
-    /**
-     * Selecciona un enemigo aleatoriamente de una lista de 5 enemigos
-     * @return Enemigo seleccionado aleatoriamente
-     */
-    private Enemy selectRandomEnemy() {
-        List<Enemy> enemies = new ArrayList<>();
-        enemies.add(new Enemy("Goblin", 50, 5, 2));
-        enemies.add(new Enemy("Ogro", 80, 10, 4));
-        enemies.add(new Enemy("Dragón Acorazado", 150, 20, 10));
-        enemies.add(new Enemy("Esqueleto Normal", 40, 8, 1));
-        enemies.add(new Enemy("Zombie", 60, 7, 3));
-
-        Random rand = new Random();
-        return enemies.get(rand.nextInt(enemies.size()));
-    }
-
-    /**
-     * Método para actualizar el estado del juego en la ventana
-     */
-    public void printStatus() {
-        statusArea.setText("");
-        statusArea.append("Estado del jugador:\n");
-        statusArea.append("Nombre: " + player.getName() + "\n");
-        statusArea.append("HP: " + player.getStats().get(Stats.HP) + "/" + player.getStats().get(Stats.MAX_HP) + "\n");
-
-        statusArea.append("\nEstado del enemigo:\n");
-        statusArea.append("Nombre: " + enemy.getName() + "\n");
-        statusArea.append("HP: " + enemy.getStats().get(Stats.HP) + "/" + enemy.getStats().get(Stats.MAX_HP) + "\n");
-    }
-
-
-
-
-        public static void main(String[] args) {
-            // Crear una lista de ítems para mostrar
-            List<Item> items = new ArrayList<>();
-            items.add(new Item("Espada", "Una espada afilada.", 100, ItemType.WEAPON));
-            items.add(new Item("Armadura", "Una armadura resistente.", 200, ItemType.ARMOR));
-            items.add(new Item("Poción", "Una poción de curación.", 50, ItemType.MISC));
-
-            // Mostrar ventana del inventario
-            SwingUtilities.invokeLater(() -> new InventoryWindow(items));
         }
 
-
-
-
+        /**
+         * Corroborar el resultado del combate
+         */
+        if (!player.isAlive()) {
+            gameUI.displayMessage("Has sido derrotado por " + enemy.getName() + "!");
+        } else {
+            gameUI.displayMessage("Has derrotado a " + enemy.getName() + "!");
+        }
     }
 
+    /**
+     * Función para crear un enemigo aleatorio
+     */
 
+    private Enemy createRandomEnemy() {
+        Random rand = new Random();
+        int enemyType = rand.nextInt(5);
 
-
-
+        switch (enemyType) {
+            case 0:
+                return new Goblin("Goblin Guerrero");
+            case 1:
+                return new Orc("Orc Salvaje");
+            case 2:
+                return new Dragon("Dragon Imponente");
+            case 3:
+                return new Troll("Troll Feroz");
+            case 4:
+                return new Skeleton("Skeleton Oscuro");
+            default:
+                throw new IllegalStateException("Unexpected value: " + enemyType);
+        }
+    }
+}

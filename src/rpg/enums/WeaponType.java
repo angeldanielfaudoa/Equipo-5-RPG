@@ -8,5 +8,6 @@ public enum WeaponType {
     AXE,        // Representa un hacha, un arma pesada que puede causar gran daño a enemigos.
     BOW,        // Representa un arco, un arma a distancia que dispara flechas.
     STAFF,      // Representa un bastón, que puede ser utilizado tanto como arma como herramienta mágica.
-    GRIMOIRE;   // Representa un grimorio, un libro mágico que puede contener hechizos y habilidades.
+    GRIMOIRE,    // Representa un grimorio, un libro mágico que puede contener hechizos y habilidades.
+    CROSSBOW;
 }

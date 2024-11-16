@@ -1,71 +1,82 @@
 package rpg.entities;
 
-import rpg.enums.Stats;  // Importa el enumerado que define las estadísticas del juego.
+import rpg.entities.enemies.Enemy;
+import rpg.enums.Stats;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Player {
-    private String name;  // Almacena el nombre del jugador.
-    private Map<Stats, Integer> stats;  // Mapa que almacena las estadísticas del jugador donde la clave es del tipo Stats y el valor es un entero.
+    private String name;
+    private int defenseBonus = 0; // Campo para almacenar el bono de defensa
+    private HashMap<Stats, Integer> stats;
 
-    /**
-     * Constructor que inicializa el nombre y las estadísticas del jugador
-     * @param name Nombre del jugador
-     */
     public Player(String name) {
-        this.name = name;  // Asigna el nombre del jugador.
-        this.stats = new HashMap<>();  // Inicializa el mapa de estadísticas para el jugador.
-
-        /**
-         * Inicializa las estadísticas del jugador con valores predeterminados
-         */
-        this.stats.put(Stats.MAX_HP, 100);  // Asigna el valor predeterminado para la vida máxima del jugador.
-        this.stats.put(Stats.HP, 100);  // Inicializa los puntos de vida actuales igual a la vida máxima.
-        this.stats.put(Stats.ATTACK, 10);  // Asigna los puntos de ataque predeterminados del jugador.
-        this.stats.put(Stats.DEFENSE, 5);  // Asigna los puntos de defensa predeterminados del jugador.
+        this.name = name;
+        this.stats = new HashMap<>();
+        this.stats.put(Stats.HP, 100);
+        this.stats.put(Stats.ATTACK, 6);
     }
 
-    /**
-     * Método para obtener el nombre del jugador
-     * @return El nombre del jugador
-     */
     public String getName() {
-        return name;  // Devuelve el nombre del jugador.
+        return this.name;
     }
 
-    /**
-     * Método para obtener las estadísticas del jugador
-     * @return Mapa de estadísticas del jugador
-     */
-    public Map<Stats, Integer> getStats() {
-        return stats;  // Devuelve el mapa de estadísticas del jugador.
+    public int getLife() {
+        return this.stats.get(Stats.HP);
     }
 
-    /**
-     * Método que verifica si el jugador está vivo
-     * @return Verdadero si el jugador tiene más de 0 puntos de vida, falso en caso contrario
-     */
-    public boolean isAlive() {
-        return this.stats.get(Stats.HP) > 0;  // Verifica si los puntos de vida del jugador son mayores que 0.
+    // Usar una poción para aumentar la vida
+    public void usePotion(int extraLife) {
+        int currentHP = this.stats.get(Stats.HP); // Obtener el valor actual de HP
+        this.stats.put(Stats.HP, currentHP + extraLife); // Actualizar el valor de HP en el mapa
+        System.out.println(this.name + " usa una poción. Vida adicional: " + extraLife);
     }
 
-    /**
-     * Método para atacar a un enemigo
-     */
-    public void attack(Enemy enemy) {
-        /**
-         * Calcula el daño como el ataque del jugador menos la defensa del enemigo
-         */
-        int damage = this.stats.get(Stats.ATTACK) - enemy.getStats().get(Stats.DEFENSE);
+    // Equipar un arma que aumenta el ataque
+    public void equipWeapon(int extraAttack) {
+        int currentAttack = this.stats.get(Stats.ATTACK);
+        this.stats.put(Stats.ATTACK, currentAttack + extraAttack);
+        System.out.println(this.name + " equipa un arma. Ataque aumentado en: " + extraAttack);
+    }
 
-        /**
-         * Si el daño es mayor que 0, aplica el daño al enemigo
-         */
-        if (damage > 0) {
-            /**
-             * Reduce los puntos de vida del enemigo en función del daño infligido
-             */
-            enemy.getStats().put(Stats.HP, enemy.getStats().get(Stats.HP) - damage);
+    // Equipar una armadura que otorga defensa adicional
+    public void equipArmor(int defense) {
+        this.defenseBonus = defense;  // Asigna el bono de defensa de la armadura
+        System.out.println(this.name + " equipa una armadura. Defensa adicional: " + defense);
+    }
+
+    // Atacar a un enemigo y aplicar daño extra si tiene un arma equipada
+    public int attack(Enemy enemy, int weaponDamageBonus) {
+        int attackPower = this.stats.get(Stats.ATTACK) + weaponDamageBonus;
+        enemy.receiveDamage(attackPower);
+        System.out.println(this.name + " ataca al enemigo con " + attackPower + " de daño.");
+        return attackPower;
+    }
+
+    // Recibir daño, aplicando el bono de defensa
+    public void receiveDamage(int damage) {
+        int reducedDamage = Math.max(damage - defenseBonus, 0);  // Reducir daño basado en defensa
+        int currentHP = this.stats.get(Stats.HP);
+        this.stats.put(Stats.HP, Math.max(currentHP - reducedDamage, 0)); // Evitar que HP baje de 0
+        System.out.println(this.name + " recibe " + reducedDamage + " de daño tras aplicar la defensa. Vida restante: " + this.stats.get(Stats.HP));
+    }
+
+    private int life;
+
+    public void takeDamage (int damage){
+        life = damage;
+        if (life < 0){
+            life = 0;
         }
+    }
+
+    // Comprobar si el jugador está muerto
+    public boolean isDead() {
+        return this.stats.get(Stats.HP) <= 0;
+    }
+
+
+    // Comprobar si el jugador está vivo
+    public boolean isAlive() {
+        return this.stats.get(Stats.HP) > 0;
     }
 }
