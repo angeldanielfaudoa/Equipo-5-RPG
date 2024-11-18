@@ -9,6 +9,8 @@ import rpg.gui.panels.MiddlePanel;
 import rpg.gui.panels.TopPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class MainWindow extends JFrame {
 
@@ -31,6 +33,8 @@ public class MainWindow extends JFrame {
     private JLabel ExpLabel;
     private JLabel nameLabel;
     private JLabel goldLabel;
+    private JScrollPane textScroll;
+    private JTextArea textDisplay;
 
     public MainWindow() {
         initComponents();
@@ -63,6 +67,25 @@ public class MainWindow extends JFrame {
         setVisible(true);
         // Definimos que la ventana no se pueda redimensionar
         setResizable(false);
+
+        // Acciones previas en el panel
+        textScroll.getViewport().setOpaque(false);
+        textScroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        textScroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        textDisplay.setFont(WindowConstants.FONT.deriveFont(22f));
+        textDisplay.setBorder(new EmptyBorder(10, 10, 10, 10));
+        textDisplay.setForeground(Color.WHITE);
+        textDisplay.setLineWrap(true);
+        textDisplay.setWrapStyleWord(true);
+    }
+
+    public void appendText(String text) {
+        // Añadimos el texto al textDisplay
+        textDisplay.append(text);
+        // Hacemos que el textDisplay se posicione en la última línea
+        textDisplay.setCaretPosition(textDisplay.getDocument().getLength());
     }
 
     private void createUIComponents() {

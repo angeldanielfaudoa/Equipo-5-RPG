@@ -76,7 +76,7 @@ public class Game {
             case 0:
                 return new Goblin("Goblin Guerrero");
             case 1:
-                return new Orc("Orc Salbaje");
+                return new Orc("Orc Salvaje");
             case 2:
                 return new Dragon("Dragon");
             case 3:

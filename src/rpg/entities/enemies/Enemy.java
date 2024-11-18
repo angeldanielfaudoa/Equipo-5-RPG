@@ -7,7 +7,7 @@ import rpg.enums.Stats;
 
 import javax.swing.*;
 
-public class Enemy extends GameCharacter {
+public abstract class Enemy extends GameCharacter {
 
     /**
      * Anexar el atributo para el tipo de enemigo
@@ -89,7 +89,7 @@ public class Enemy extends GameCharacter {
 
     public abstract void getLoot();
 
-    public abstract void attack(GameCharacter enemy);
+    public abstract String attack(GameCharacter enemy);
 
     public EnemyType getType() {
         return type;
@@ -97,5 +97,10 @@ public class Enemy extends GameCharacter {
 
     public void setName(String name) {
         this.name = name;
+
+
+        protected EnemyType type;
+
+
     }
 }

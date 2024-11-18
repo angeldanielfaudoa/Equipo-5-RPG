@@ -1,11 +1,24 @@
 package rpg.enums;
 
 /**
- * Enum representing the different types of enemies in the game.
+ * The enum Enemy type.
  */
 public enum EnemyType {
+
+    /**
+     * Tipo de enemigo básico.
+     */
     BASIC,
+    /**
+     * Tipo de enemigo medio.
+     */
     MEDIUM,
+    /**
+     * Tipo de enemigo jefe.
+     */
     BOSS,
-    SECRET;
+    /**
+     * Tipo de enemigo secreto.
+     */
+    SECRET
 }
