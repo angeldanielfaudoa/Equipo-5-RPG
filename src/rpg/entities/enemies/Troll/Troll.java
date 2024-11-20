@@ -5,6 +5,7 @@ import rpg.enums.EnemyType;
 import rpg.enums.Stats;
 import rpg.exceptions.EnemyDeathException;
 import rpg.utils.cache.ImageCache;
+import rpg.utils.cache.Randomized;
 
 import javax.swing.*;
 
@@ -39,7 +40,7 @@ public class Troll extends Enemy {
     public String attack(GameCharacter enemy) {
         String message;
         // Se elige un número aleatorio entre 1 y 100
-        int random = Randomize.getRandomInt(1, 100);
+        int random = Randomized.getRandomInt(1, 100);
         // 50% de probabilidad de atacar normalmente
         // 25% de probabilidad de morder
         // 25% de probabilidad de lanzar una roca

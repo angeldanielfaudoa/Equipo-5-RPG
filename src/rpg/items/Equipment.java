@@ -14,13 +14,6 @@ public abstract class Equipment extends Item implements Equipable {
     protected Rarity rarity;
     protected HashMap<Stats, Integer> stats;
 
-    public Equipment(String name, String description, int price, ItemType itemType, Slot slot, Rarity rarity) {
-        super(name, description, price, itemType);
-        this.slot = slot;
-        this.rarity = rarity;
-        this.stats = new HashMap<>();
-    }
-
     @Override
     public void equip() {
         // Implementar lógica de equipamiento

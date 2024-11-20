@@ -1,9 +1,8 @@
 package rpg.inventory;
 
-import rpg.items.*; // Importa todas las clases del paquete de items.
 import rpg.items.Armors.Armor; // Importa la clase Armor del paquete de armaduras.
 import rpg.items.Item; // Importa la clase base Item.
-import rpg.items.Misc; // Importa la clase Misc para ítems varios.
+import rpg.items.Miscs.Misc;
 import rpg.items.weapons.Weapon; // Importa la clase Weapon del paquete de armas.
 
 import java.util.ArrayList; // Importa la clase ArrayList para usar listas dinámicas.

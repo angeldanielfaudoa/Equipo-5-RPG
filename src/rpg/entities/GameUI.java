@@ -256,17 +256,17 @@ public class GameUI extends JFrame {
 
             // Configuración de inventario y personajes
             Inventory inventory = new Inventory(10);
-            Armor armor = new IronArmor("Bronce", "Armadura básica", 450, 34, 32, "Defensa");
+            Armor armor = new IronArmor();
             inventory.addItem(armor);
 
-            Weapon weapon = new Weapon("Pistola", "Arma de distancia", 555, WeaponType.CROSSBOW);
-            inventory.addItem(weapon);
+            /*Weapon weapon = new Weapon("Pistola", "Arma de distancia", 555, WeaponType.CROSSBOW);
+            inventory.addItem(weapon);*/
 
-            Misc misc = new Misc("Poción", "Curación", 455, "Curación rápida", 10, 1, ItemType.MISC);
-            inventory.addItem(misc);
+            /*Misc misc = new Misc("Poción", "Curación", 455, "Curación rápida", 10, 1, ItemType.MISC);
+            inventory.addItem(misc);*/
 
             Player player = new Player("Andrew");
-            player.usePotion(misc.getPotency());
+           /* player.usePotion(misc.getPotency());*/
             player.equipWeapon(20);
             player.equipArmor(3);
 

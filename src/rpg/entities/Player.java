@@ -5,7 +5,8 @@ import rpg.enums.Stats;
 import rpg.exceptions.ItemNotFoundException;
 import rpg.inventory.Inventory;
 import rpg.items.Item;
-import rpg.items.Misc;
+import rpg.items.Miscs.Misc;
+import rpg.utils.cache.Randomized;
 
 import javax.swing.*;
 import java.io.Serializable;
@@ -15,17 +16,6 @@ public class Player extends GameCharacter implements Serializable {
     private String name;
     private int defenseBonus = 0; // Campo para almacenar el bono de defensa
     private HashMap<Stats, Integer> stats;
-
-    public Player(String name) {
-        this.name = name;
-        this.stats = new HashMap<>();
-        this.stats.put(Stats.HP, 100);
-        this.stats.put(Stats.ATTACK, 6);
-    }
-
-    public String getName() {
-        return this.name;
-    }
 
     public int getLife() {
         return this.stats.get(Stats.HP);
@@ -54,7 +44,7 @@ public class Player extends GameCharacter implements Serializable {
     // Atacar a un enemigo y aplicar daño extra si tiene un arma equipada
     public int attack(Enemy enemy, int weaponDamageBonus) {
         int attackPower = this.stats.get(Stats.ATTACK) + weaponDamageBonus;
-        enemy.receiveDamage(attackPower);
+        enemy.takeDamage(attackPower);
         System.out.println(this.name + " ataca al enemigo con " + attackPower + " de daño.");
         return attackPower;
     }
@@ -92,23 +82,23 @@ public class Player extends GameCharacter implements Serializable {
     public Player(String name) {
 
         super(name);
-        inventory = new Inventory();
+        inventory = new Inventory(15);
     }
 
     public boolean tryToFlee() {
 
-        return Randomize.getRandomBoolean();
+        return Randomized.getRandomBoolean();
     }
 
     public void levelUp() {
 
         stats.put(Stats.LEVEL, stats.get(Stats.LEVEL) + 1);
-        stats.put(Stats.MAX_HP, stats.get(Stats.MAX_HP) + Randomize.getRandomInt(5, 10));
+        stats.put(Stats.MAX_HP, stats.get(Stats.MAX_HP) + Randomized.getRandomInt(5, 10));
         stats.put(Stats.HP, stats.get(Stats.MAX_HP));
-        stats.put(Stats.MAX_MP, stats.get(Stats.MAX_MP) + Randomize.getRandomInt(2, 5));
+        stats.put(Stats.MAX_MP, stats.get(Stats.MAX_MP) + Randomized.getRandomInt(2, 5));
         stats.put(Stats.MP, stats.get(Stats.MAX_MP));
-        stats.put(Stats.ATTACK, stats.get(Stats.ATTACK) + Randomize.getRandomInt(1, 3));
-        stats.put(Stats.DEFENSE, stats.get(Stats.DEFENSE) + Randomize.getRandomInt(1, 3));
+        stats.put(Stats.ATTACK, stats.get(Stats.ATTACK) + Randomized.getRandomInt(1, 3));
+        stats.put(Stats.DEFENSE, stats.get(Stats.DEFENSE) + Randomized.getRandomInt(1, 3));
         stats.put(Stats.NEEDED_EXPERIENCE, stats.get(Stats.NEEDED_EXPERIENCE) + 50);
         stats.put(Stats.EXPERIENCE, 0);
     }
@@ -133,7 +123,7 @@ public class Player extends GameCharacter implements Serializable {
         if (item instanceof Misc misc) {
             if (misc.isStackable()) {
                 boolean found = false;
-                for (Item i : inventory.getMiscs()) {
+                for (Item i : inventory.listMisc()) {
                     if (i.getName().equals(misc.getName())) {
                         misc.increaseQuantity(1);
                         inventory.removeItem(i);
@@ -157,7 +147,7 @@ public class Player extends GameCharacter implements Serializable {
 
         if (item instanceof Misc misc) {
             if (misc.isStackable()) {
-                for (Item i : inventory.getMiscs()) {
+                for (Item i : inventory.listMisc()) {
                     if (i.getName().equals(item.getName())) {
                         misc.decreaseQuantity(1);
                         if (misc.getQuantity() == 0) {
@@ -176,7 +166,7 @@ public class Player extends GameCharacter implements Serializable {
 
     public void sellItem(Item item) {
 
-        try {
+       /* try {
             Item getItem = inventory.getItem(item);
             if (getItem instanceof Misc misc) {
                 if (misc.isStackable()) {
@@ -191,12 +181,12 @@ public class Player extends GameCharacter implements Serializable {
             }
         } catch (ItemNotFoundException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        }*/
     }
 
     public void showInventory() {
 
-        StringBuilder content = new StringBuilder("Inventory: \n");
+       /* StringBuilder content = new StringBuilder("Inventory: \n");
         String format = """
                 Name: %s, Price: %d
                 Description: %s
@@ -220,7 +210,7 @@ public class Player extends GameCharacter implements Serializable {
                         item.getDescription()));
             }
         }
-        JOptionPane.showMessageDialog(null, content.toString());
+        JOptionPane.showMessageDialog(null, content.toString());*/
     }
 
     public Inventory getInventory() {

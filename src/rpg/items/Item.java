@@ -2,18 +2,19 @@ package rpg.items;
 
 import rpg.enums.ItemType;
 
-public class Item {
-    private String name;
-    private String description;
-    private int price;
-    private ItemType itemType;
+import java.io.Serializable;
 
-    public Item(String name, String description, int price, ItemType itemType) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.itemType = itemType;
+public abstract class Item implements Serializable {
+    protected String name;
+    protected String description;
+    protected int price;
+    protected ItemType itemType;
+
+    public Item() {
+        initItem();
     }
+
+    protected abstract void initItem();
 
     public String getName() {
         return name;

@@ -16,6 +16,7 @@ public abstract class Enemy extends GameCharacter {
 
     /**
      * Agregar constructor que solo acepte nombre y tipo de enemigo
+     *
      * @param name
      * @param enemyType
      */
@@ -35,6 +36,7 @@ public abstract class Enemy extends GameCharacter {
 
     /**
      * Agregar constructor que solo acepte nombre y tipo de enemigo
+     *
      * @param name
      */
     public Enemy(String name) {
@@ -46,13 +48,14 @@ public abstract class Enemy extends GameCharacter {
 
     /**
      * Función para obtener el tipo de enemigo
+     *
      * @return
      */
     public String getEnemyType() {
         return this.enemyType;
     }
 
-    public int getInitialHP (){
+    public int getInitialHP() {
         return getInitialHP();
     }
 
@@ -97,10 +100,6 @@ public abstract class Enemy extends GameCharacter {
 
     public void setName(String name) {
         this.name = name;
-
-
-        protected EnemyType type;
-
 
     }
 }

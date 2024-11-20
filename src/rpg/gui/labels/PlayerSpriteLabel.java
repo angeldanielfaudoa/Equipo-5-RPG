@@ -12,7 +12,7 @@ public class PlayerSpriteLabel extends PortraitLabel {
 
     @Override
     public void initComponents() {
-        ImageCache.addImage("playerSprite", "player/player.png");
+        ImageCache.addImage("playerSprite", "personajes/personaje.png");
         icon = ImageCache.getImageIcon("playerSprite");
         setPreferredSize(new Dimension(icon.getIconWidth(),
                 icon.getIconHeight()));

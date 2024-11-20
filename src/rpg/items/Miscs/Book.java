@@ -3,28 +3,24 @@ package rpg.items.Miscs;
 import rpg.enums.ItemType;
 import rpg.items.Item;
 
+import java.io.Serializable;
+
 // Clase para objetos de tipo Libro
-public class Book extends Item {
+public class Book extends Misc implements Serializable {
 
-    private String author;
-    private int pages;
-
-    public Book(String name, String description, int price, String author, int pages, ItemType itemType) {
-        super(name, description, price, itemType);
-        this.author = author;
-        this.pages = pages;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public int getPages() {
-        return pages;
+    @Override
+    public void initItem(){
+        this.itemType = ItemType.MISC;
+        this.name = "Piel de lobo";
+        this.description = "Una piel de lobo. Se puede vender por un buen precio.";
+        this.price = 50;
+        this.consumable = false;
+        this.stackable = true;
+        this.quantity = 1;
     }
 
     @Override
-    public String toString() {
-        return super.toString() + " - Author: " + author + ", Pages: " + pages;
+    public void use() {
+
     }
 }

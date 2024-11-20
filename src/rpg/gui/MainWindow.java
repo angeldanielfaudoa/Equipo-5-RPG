@@ -1,6 +1,7 @@
 package rpg.gui;
 
 import rpg.entities.enemies.Enemy;
+import rpg.entities.enemies.Goblin.Goblin;
 import rpg.enums.BarType;
 import rpg.gui.buttons.BaseButton;
 import rpg.gui.labels.*;
@@ -35,6 +36,10 @@ public class MainWindow extends JFrame {
     private JLabel goldLabel;
     private JScrollPane textScroll;
     private JTextArea textDisplay;
+    private JLabel playerSprite;
+    private JLabel enemyNameLabel;
+    private JLabel enemyLifeLabel;
+    private JLabel enemySprite;
 
     public MainWindow() {
         initComponents();
@@ -120,13 +125,13 @@ public class MainWindow extends JFrame {
 
 
         goldLabel = new GoldLabel();
-        nameLabel = new NameLabel("{Andrew} LVL. 1");
+        nameLabel = new NameLabel("Andrew LVL. 1");
 
         // Componentes del enemigo
-        exampleLabel = new PortraitLabel();
+        portraitLabel = new PortraitLabel();
         playerSprite = new PlayerSpriteLabel();
 
-        Enemy enemy = new RookieGoblin();
+        Enemy enemy = new Goblin("Goblin");
         enemyNameLabel = new NameLabel(enemy.getName());
         enemyLifeLabel = new BarLabel(100, 100, BarType.LIFE);
         enemySprite = new EnemySpriteLabel(enemy);
