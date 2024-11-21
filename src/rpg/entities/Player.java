@@ -9,13 +9,39 @@ import rpg.items.Miscs.Misc;
 import rpg.utils.cache.Randomized;
 
 import javax.swing.*;
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
 
 public class Player extends GameCharacter implements Serializable {
     private String name;
     private int defenseBonus = 0; // Campo para almacenar el bono de defensa
     private HashMap<Stats, Integer> stats;
+
+    public void save(int slot) {
+
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("files/save" + slot + ".dat"));
+            out.writeObject(this);
+            out.close();
+            System.out.println("Game saved");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error saving the game");
+        }
+    }
+
+    public static Player load(int slot) {
+
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream
+                    ("files/save" + slot + ".dat"));
+            Player player = (Player) in.readObject();
+            in.close();
+            return player;
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error loading the game");
+        }
+        return null;
+    }
 
     public int getLife() {
         return this.stats.get(Stats.HP);

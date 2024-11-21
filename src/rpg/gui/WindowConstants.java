@@ -34,5 +34,13 @@ public interface WindowConstants {
     Dimension BAR_LABEL = new Dimension(172, 51);
     EmptyBorder EMPTY_BORDER = new EmptyBorder(14, SIMPLE_MARGIN,
             SIMPLE_MARGIN, SIMPLE_MARGIN);
+
+
+    Dimension START_WINDOW_DIMENSION = new Dimension(800, 600);
+    Dimension FILES_PANEL_DIMENSION = new Dimension(786, 563);
+    Dimension NEW_PLAYER_PANEL_DIMENSION = new Dimension(786, 250);
+
+
+
 }
 

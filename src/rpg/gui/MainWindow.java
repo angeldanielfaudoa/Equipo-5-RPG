@@ -1,8 +1,10 @@
 package rpg.gui;
 
+import rpg.entities.Player;
 import rpg.entities.enemies.Enemy;
 import rpg.entities.enemies.Goblin.Goblin;
 import rpg.enums.BarType;
+import rpg.enums.Stats;
 import rpg.gui.buttons.BaseButton;
 import rpg.gui.labels.*;
 import rpg.gui.panels.BottomPanel;
@@ -39,10 +41,19 @@ public class MainWindow extends JFrame {
     private JLabel enemyLifeLabel;
     private JLabel enemySprite;
     private JButton button4;
+    Player player;
+    Enemy enemy;
+    int slot;
 
-    public MainWindow() {
-        initComponents();
-        createUIComponents();
+    public MainWindow(Player player, int slot) {
+
+        this.player = player;
+        this.slot = slot;
+
+        // Añadimos un mensaje al textDisplay de bienvenida
+        appendText("¡Bienvenido a RPG Game!\n");
+        appendText("¡Prepárate para la aventura!\n");
+        appendText("Aparece un nuevo enemigo: " + enemy.getName() + "\n");
     }
 
     private void initComponents() {
@@ -134,8 +145,17 @@ public class MainWindow extends JFrame {
         enemySprite = new EnemySpriteLabel(enemy);
     }
 
-    public static void main(String[] args) {
-        new MainWindow();
+    public Player getPlayer() {
+        return player;
     }
 
+    public Enemy getEnemy() {
+        return enemy;
+    }
+
+
+
+
 }
+
+

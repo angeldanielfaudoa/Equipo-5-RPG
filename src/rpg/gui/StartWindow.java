@@ -1,6 +1,9 @@
 package rpg.gui;
 
+import rpg.gui.buttons.LoadFileButton;
+import rpg.gui.buttons.NewFileButton;
 import rpg.gui.labels.NameLabel;
+import rpg.gui.panels.FilesPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +11,21 @@ import java.awt.*;
 public class StartWindow extends JFrame {
     private JLabel titleLabel;
     private JPanel mainPanel;
-    private JList list1;
     private JLabel file1Name;
-    private JButton button1;
+    private JButton NewFile1;
+    private JButton LoadFile1;
+    private JLabel file2Name;
+    private JButton newFile2;
+    private JButton loadFile2;
+    private JButton newFile3;
+    private JButton loadFile3;
+    private JButton newFile4;
+    private JButton loadFile4;
+    private JButton newFile5;
+    private JButton loadFile5;
+    private JLabel file3Name;
+    private JLabel file4Name;
+    private JLabel file5Name;
 
     private void createUIComponents() {
 
@@ -19,8 +34,8 @@ public class StartWindow extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         file1Name = new NameLabel("");
-        newFile1 = new NewFileButton(1, this);
-        loadFile1 = new LoadFileButton(1, this);
+        NewFile1 = new NewFileButton(1, this);
+        LoadFile1= new LoadFileButton(1, this);
         file2Name = new NameLabel("");
         newFile2 = new NewFileButton(2, this);
         loadFile2 = new LoadFileButton(2, this);
