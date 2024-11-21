@@ -19,7 +19,7 @@ public class Goblin extends Enemy {
     public Goblin(String name) {
 
         super(name,"Goblin");
-        ImageCache.addImage("Goblin", "Enemies/goblin.png");
+        ImageCache.addImage("goblin", "Enemies/goblin.png");
     }
 
     @Override

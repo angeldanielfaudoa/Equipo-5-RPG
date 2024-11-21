@@ -4,6 +4,7 @@ import rpg.entities.enemies.Enemy;
 import rpg.gui.ui.EnemyLabelUI;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class EnemySpriteLabel extends JLabel {
@@ -28,8 +29,8 @@ public class EnemySpriteLabel extends JLabel {
 
     private Dimension getMinDimension() {
 
-        if (icon.getIconWidth() > 350 || icon.getIconHeight() > 184) {
-            icon = new ImageIcon(icon.getImage().getScaledInstance(450, 250, Image.SCALE_SMOOTH));
+        if (icon.getIconWidth() > 250 || icon.getIconHeight() > 150) {
+            icon = new ImageIcon(icon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
         }
         return new Dimension(icon.getIconWidth(), icon.getIconHeight());
     }

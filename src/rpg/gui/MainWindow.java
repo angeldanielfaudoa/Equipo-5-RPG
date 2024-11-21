@@ -21,8 +21,6 @@ public class MainWindow extends JFrame {
     private JPanel bottomPanel;
     private JDesktopPane desktopPane;
     private JButton button1;
-    private JButton Tienda;
-    private JButton Inventario;
     private JButton Atacar;
     private JButton Huir;
     private JButton Skills;
@@ -40,6 +38,7 @@ public class MainWindow extends JFrame {
     private JLabel enemyNameLabel;
     private JLabel enemyLifeLabel;
     private JLabel enemySprite;
+    private JButton button4;
 
     public MainWindow() {
         initComponents();
@@ -103,16 +102,14 @@ public class MainWindow extends JFrame {
         button1=new BaseButton("Guardar");
         button2=new BaseButton("Inventario");
         button3=new BaseButton("Tienda");
+        button4=new BaseButton("Salir");
 
-        // Botones específicos de acción
-        Atacar = new  BaseButton("Atacar");
 
         // Botones adicionales en español
-        Tienda = new BaseButton("Tienda");
-        Inventario = new BaseButton("Inventario");
         Atacar = new BaseButton("Atacar");
         Huir = new BaseButton("Huir");
         Skills = new BaseButton("Skills");
+
 
         // Etiqueta adicional
         portraitLabel = new PortraitLabel();
