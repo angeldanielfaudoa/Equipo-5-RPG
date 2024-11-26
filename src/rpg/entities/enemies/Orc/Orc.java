@@ -1,5 +1,6 @@
 package rpg.entities.enemies.Orc;
 import rpg.entities.GameCharacter;
+import rpg.entities.Player;
 import rpg.entities.enemies.Enemy;
 import rpg.enums.EnemyType;
 import rpg.enums.Stats;
@@ -20,6 +21,11 @@ public class Orc extends Enemy {
 
         super(name,"Orc");
         ImageCache.addImage("Orc", "Enemies/orc.png");
+    }
+
+    @Override
+    public String attack(Player player) {
+        return "";
     }
 
     @Override

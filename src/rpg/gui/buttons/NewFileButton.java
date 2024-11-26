@@ -1,8 +1,7 @@
 package rpg.gui.buttons;
 
-import rpg.gui.buttons.events.NewPlayerEvent;
-import rpg.NewFileWindow;
 import rpg.gui.StartWindow;
+import rpg.gui.buttons.events.NewPlayerEvent;
 
 public class NewFileButton extends BaseButton {
 

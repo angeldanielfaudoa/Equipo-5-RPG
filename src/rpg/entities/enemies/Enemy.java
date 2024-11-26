@@ -77,12 +77,7 @@ public abstract class Enemy extends GameCharacter {
     /**
      * Función para atacar al jugador
      */
-    public int attack(Player player) {
-        int attackPower = this.stats.get(Stats.ATTACK);
-        player.receiveDamage(attackPower);
-        System.out.println(this.name + " attacks " + player.getName() + " for " + attackPower + " damage!");
-        return attackPower;
-    }
+    public abstract String attack(Player player);
 
 
     protected EnemyType type;

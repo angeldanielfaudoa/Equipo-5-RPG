@@ -1,6 +1,7 @@
 package rpg.entities.enemies.Goblin;
 
 import rpg.entities.GameCharacter;
+import rpg.entities.Player;
 import rpg.entities.enemies.Enemy;
 import rpg.enums.EnemyType;
 import rpg.enums.Stats;
@@ -20,6 +21,11 @@ public class Goblin extends Enemy {
 
         super(name,"Goblin");
         ImageCache.addImage("goblin", "Enemies/goblin.png");
+    }
+
+    @Override
+    public String attack(Player player) {
+        return "";
     }
 
     @Override

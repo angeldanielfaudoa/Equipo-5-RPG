@@ -54,7 +54,6 @@ public abstract class GameCharacter implements Serializable {
      * se imprime un mensaje indicando que no se hizo daño.
      *
      * @param enemy el enemigo a atacar.
-     * @return
      */
     public String attack(GameCharacter enemy) {
 

@@ -5,6 +5,7 @@ import rpg.entities.enemies.Enemy;
 import rpg.entities.enemies.Goblin.Goblin;
 import rpg.enums.BarType;
 import rpg.enums.Stats;
+import rpg.factory.EnemyFactory;
 import rpg.gui.buttons.BaseButton;
 import rpg.gui.labels.*;
 import rpg.gui.panels.BottomPanel;
@@ -41,6 +42,7 @@ public class MainWindow extends JFrame {
     private JLabel enemyLifeLabel;
     private JLabel enemySprite;
     private JButton button4;
+
     Player player;
     Enemy enemy;
     int slot;
@@ -49,7 +51,19 @@ public class MainWindow extends JFrame {
 
         this.player = player;
         this.slot = slot;
-
+        initComponents();
+        ((BarLabel) LifeLabel).updateBar(player.getStats().get(Stats.HP), player.getStats().get(Stats.MAX_HP));
+        ((BarLabel) MagicLabel).updateBar(player.getStats().get(Stats.MP), player.getStats().get(Stats.MAX_MP));
+        ((BarLabel) ExpLabel).updateBar(player.getStats().get(Stats.EXPERIENCE), player.getStats().get(Stats.NEEDED_EXPERIENCE));
+        //statusFrame = new StatusFrame(this);
+        //inventoryFrame = new InventoryFrame(this);
+        //desktopPane.add(statusFrame, JLayeredPane.PALETTE_LAYER);
+       // desktopPane.add(inventoryFrame, JLayeredPane.PALETTE_LAYER);
+        // Colocamos los InternalFrames en la posición deseada
+       // statusFrame.setLocation((desktopPane.getWidth() - statusFrame.getWidth()) / 2,
+         //       (desktopPane.getHeight() - statusFrame.getHeight()) / 2);
+       // inventoryFrame.setLocation((desktopPane.getWidth() - inventoryFrame.getWidth()) / 2,
+             //   (desktopPane.getHeight() - inventoryFrame.getHeight()) / 2);
         // Añadimos un mensaje al textDisplay de bienvenida
         appendText("¡Bienvenido a RPG Game!\n");
         appendText("¡Prepárate para la aventura!\n");
@@ -153,9 +167,85 @@ public class MainWindow extends JFrame {
         return enemy;
     }
 
+    public void checkGameStatus() {
 
+        // Verificamos si el jugador o el enemigo han muerto
+        if (!player.isAlive()) {
+            // En caso de que el jugador haya muerto
+            // Añadimos un mensaje al textDisplay de que el jugador ha muerto
+            appendText("Has muerto.\n");
+            appendText("GAME OVER\n");
+        } else if (!enemy.isAlive()) {
+            // En caso de que el enemigo haya muerto
+            // Recuperamos la experiencia y el oro del jugador y del enemigo
+            int playerExp = player.getStats().get(Stats.EXPERIENCE);
+            int enemyExp = enemy.getStats().get(Stats.EXPERIENCE);
+            int promotionExp = player.getStats().get(Stats.NEEDED_EXPERIENCE);
+            int playerGold = player.getStats().get(Stats.GOLD);
+            int enemyGold = enemy.getStats().get(Stats.GOLD);
+            // Calculamos el total de experiencia y oro
+            int totalExp = playerExp + enemyExp;
+            int totalGold = playerGold + enemyGold;
+            // Añadimos un mensaje al textDisplay de que se ha derrotado al enemigo
+            // y se ha ganado experiencia y oro.
+            appendText("""
+                    Has derrotado a %s
+                    Has ganado %d puntos de experiencia.
+                    Has ganado %d monedas de oro.
+                    """.formatted(enemy.getName(), enemyExp, enemyGold));
+            // Asignamos la nueva experiencia y oro al jugador
+            player.getStats().put(Stats.EXPERIENCE, totalExp);
+            player.getStats().put(Stats.GOLD, totalGold);
+            goldLabel.setText(totalGold + "G");
+            goldLabel.repaint();
+            // Evaluamos si el jugador ha subido de nivel
+            if (totalExp >= promotionExp)
+                updatePlayer();
+            // Creamos un nuevo enemigo en cualquier caso
+            createEnemy();
+        }
+        updateBars();
+    }
 
+    private void updatePlayer() {
+
+        // Actualizamos al jugador
+        player.levelUp();
+        // Obtenemos el nivel, vida, magia y experiencia del jugador
+        int level = player.getStats().get(Stats.LEVEL);
+        int hp = player.getStats().get(Stats.HP);
+        int mp = player.getStats().get(Stats.MP);
+        int neededExp = player.getStats().get(Stats.NEEDED_EXPERIENCE);
+        // Añadimos un mensaje al textDisplay de que el jugador ha subido de nivel
+        appendText("Has subido de nivel.\n");
+        // Actualizamos las barras de estado del jugador
+        ((BarLabel) LifeLabel).updateBar(hp, hp);
+        ((BarLabel) MagicLabel).updateBar(mp, mp);
+        ((BarLabel) ExpLabel).updateBar(0, neededExp);
+        // Actualizamos el nombre del jugador
+        ((NameLabel) nameLabel).updateLabel(
+                "%s LVL. %d".formatted(player.getName(), level));
+    }
+
+    private void createEnemy() {
+
+        enemy = EnemyFactory.getEnemy();
+        if (enemy != null) {
+
+            enemyNameLabel.setText(enemy.getName());
+            appendText("Aparece un nuevo enemigo: " + enemy.getName() + "\n");
+            ((EnemySpriteLabel) enemySprite).setEnemy(enemy);
+            ((NameLabel) enemyNameLabel).updateLabel(enemy.getName());
+            ((BarLabel) enemyLifeLabel).updateBar(enemy.getStats().get(Stats.HP),
+                    enemy.getStats().get(Stats.MAX_HP));
+        }
+    }
+
+    private void updateBars() {
+
+        ((BarLabel) LifeLabel).setBarValue(player.getStats().get(Stats.HP));
+        ((BarLabel) ExpLabel).setBarValue(player.getStats().get(Stats.EXPERIENCE));
+        ((BarLabel) enemyLifeLabel).setBarValue(enemy.getStats().get(Stats.HP));
+    }
 
 }
-
-

@@ -1,5 +1,6 @@
 package rpg.entities.enemies.Troll;
 import rpg.entities.GameCharacter;
+import rpg.entities.Player;
 import rpg.entities.enemies.Enemy;
 import rpg.enums.EnemyType;
 import rpg.enums.Stats;
@@ -18,6 +19,11 @@ public class Troll extends Enemy {
 
         super(name,"Troll");
         ImageCache.addImage("Troll", "Enemies/troll.png");
+    }
+
+    @Override
+    public String attack(Player player) {
+        return "";
     }
 
     @Override

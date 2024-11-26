@@ -11,7 +11,7 @@ public class FilesPanel extends BackgroundPanel {
     protected void init() {
         // Buscamos la imagen por ahora directamente en los directorios
         backgroundImage = new ImageIcon(ImageCache.addImage("borderPanel",
-                "panels/borderPanel.png"));
+                "Paneles/borderPanel.png"));
         setDimension(WindowConstants.FILES_PANEL_DIMENSION);
     }
 }

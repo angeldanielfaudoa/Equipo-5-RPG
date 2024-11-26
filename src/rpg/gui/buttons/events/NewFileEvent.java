@@ -3,7 +3,7 @@ package rpg.gui.buttons.events;
 import rpg.entities.Player;
 import rpg.gui.MainWindow;
 import rpg.NewFileWindow;
-import rpg.gui.StartWindow;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

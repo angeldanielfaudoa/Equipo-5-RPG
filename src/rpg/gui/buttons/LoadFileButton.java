@@ -1,7 +1,8 @@
 package rpg.gui.buttons;
 
-import rpg.gui.buttons.events.LoadFileEvent;
 import rpg.gui.StartWindow;
+import rpg.gui.buttons.events.LoadFileEvent;
+
 
 public class LoadFileButton extends NewFileButton {
 

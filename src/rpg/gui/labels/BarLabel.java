@@ -35,5 +35,24 @@ public class BarLabel extends JLabel {
         return barValue;
     }
 
-    // Otros métodos de la clase como los getters y setters
+    public void updateBar(int value, int maxValue) {
+
+        setMaxValue(maxValue);
+        setBarValue(value);
+        setUI(new BarLabelUI(type));
+        revalidate();
+        repaint();
+    }
+
+    public void setMaxValue(int value) {
+        this.maxValue = value;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public BarType getType() {
+        return type;
+    }
 }

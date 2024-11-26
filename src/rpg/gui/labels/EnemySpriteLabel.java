@@ -34,4 +34,20 @@ public class EnemySpriteLabel extends JLabel {
         }
         return new Dimension(icon.getIconWidth(), icon.getIconHeight());
     }
+
+    public void updateSprite() {
+
+        icon = enemy.getSprite();
+        setUI(new EnemyLabelUI(icon));
+        setPreferredSize(getMinDimension());
+        setSize(getMinDimension());
+        setIcon(icon);
+        revalidate();
+        repaint();
+    }
+
+
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+    }
 }
