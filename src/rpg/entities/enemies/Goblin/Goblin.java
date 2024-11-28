@@ -17,9 +17,9 @@ public class Goblin extends Enemy {
      * Agregar constructor para Goblin
      */
 
-    public Goblin(String name) {
+    public Goblin() {
 
-        super(name,"Goblin");
+        super("Goblin");
         ImageCache.addImage("goblin", "Enemies/goblin.png");
     }
 

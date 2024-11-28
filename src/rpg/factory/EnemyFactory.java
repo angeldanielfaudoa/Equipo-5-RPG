@@ -41,6 +41,7 @@ public class EnemyFactory {
                 throw new Exception();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
         return enemyInstance;

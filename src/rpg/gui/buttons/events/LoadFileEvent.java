@@ -21,7 +21,10 @@ public class LoadFileEvent implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Player player = Player.load(slot);
+        System.out.println("C_X " + player.getName());
         startWindow.dispose();
-        new MainWindow(player, slot);
+        if(player != null) {
+            new MainWindow(player, slot);
+        }
     }
 }

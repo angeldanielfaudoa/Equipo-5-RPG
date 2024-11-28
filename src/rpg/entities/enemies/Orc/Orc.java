@@ -17,9 +17,9 @@ public class Orc extends Enemy {
      * Agregar constructor para Orc
      */
 
-    public Orc(String name) {
+    public Orc() {
 
-        super(name,"Orc");
+        super("Orc");
         ImageCache.addImage("Orc", "Enemies/orc.png");
     }
 
@@ -109,6 +109,6 @@ public class Orc extends Enemy {
     @Override
     public ImageIcon getSprite() {
 
-        return ImageCache.getImageIcon("orc");
+        return ImageCache.getImageIcon("Orc");
     }
 }

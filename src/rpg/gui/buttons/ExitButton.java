@@ -1,6 +1,6 @@
 package rpg.gui.buttons;
 
-public class ExitButton extends BaseButton{
+public class ExitButton extends BaseButton {
 
     public ExitButton() {
 

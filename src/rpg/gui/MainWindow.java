@@ -6,7 +6,7 @@ import rpg.entities.enemies.Goblin.Goblin;
 import rpg.enums.BarType;
 import rpg.enums.Stats;
 import rpg.factory.EnemyFactory;
-import rpg.gui.buttons.BaseButton;
+import rpg.gui.buttons.*;
 import rpg.gui.labels.*;
 import rpg.gui.panels.BottomPanel;
 import rpg.gui.panels.MiddlePanel;
@@ -65,9 +65,6 @@ public class MainWindow extends JFrame {
        // inventoryFrame.setLocation((desktopPane.getWidth() - inventoryFrame.getWidth()) / 2,
              //   (desktopPane.getHeight() - inventoryFrame.getHeight()) / 2);
         // Añadimos un mensaje al textDisplay de bienvenida
-        appendText("¡Bienvenido a RPG Game!\n");
-        appendText("¡Prepárate para la aventura!\n");
-        appendText("Aparece un nuevo enemigo: " + enemy.getName() + "\n");
     }
 
     private void initComponents() {
@@ -105,9 +102,12 @@ public class MainWindow extends JFrame {
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         textDisplay.setFont(WindowConstants.FONT.deriveFont(22f));
         textDisplay.setBorder(new EmptyBorder(10, 10, 10, 10));
-        textDisplay.setForeground(Color.WHITE);
+        textDisplay.setForeground(Color.BLACK);
         textDisplay.setLineWrap(true);
         textDisplay.setWrapStyleWord(true);
+        appendText("¡Bienvenido a RPG Game!\n");
+        appendText("¡Prepárate para la aventura!\n");
+        appendText("Aparece un nuevo enemigo: " + enemy.getName() + "\n");
     }
 
     public void appendText(String text) {
@@ -118,21 +118,23 @@ public class MainWindow extends JFrame {
     }
 
     private void createUIComponents() {
+        enemy = EnemyFactory.getEnemy();
+        System.out.println(enemy.getName());
         // Paneles principales
         topPanel = new TopPanel();
         middlePanel = new MiddlePanel();
         bottomPanel = new BottomPanel();
 
         // Botones
-        button1=new BaseButton("Guardar");
+        button1=new SaveButton(this, player, slot);
         button2=new BaseButton("Inventario");
         button3=new BaseButton("Tienda");
-        button4=new BaseButton("Salir");
+        button4=new ExitButton();
 
 
         // Botones adicionales en español
-        Atacar = new BaseButton("Atacar");
-        Huir = new BaseButton("Huir");
+        Atacar = new Atacar(this);
+        Huir = new FleeButton(this);
         Skills = new BaseButton("Skills");
 
 
@@ -152,8 +154,6 @@ public class MainWindow extends JFrame {
         // Componentes del enemigo
         portraitLabel = new PortraitLabel();
         playerSprite = new PlayerSpriteLabel();
-
-        Enemy enemy = new Goblin("Goblin");
         enemyNameLabel = new NameLabel(enemy.getName());
         enemyLifeLabel = new BarLabel(100, 100, BarType.LIFE);
         enemySprite = new EnemySpriteLabel(enemy);
@@ -246,6 +246,29 @@ public class MainWindow extends JFrame {
         ((BarLabel) LifeLabel).setBarValue(player.getStats().get(Stats.HP));
         ((BarLabel) ExpLabel).setBarValue(player.getStats().get(Stats.EXPERIENCE));
         ((BarLabel) enemyLifeLabel).setBarValue(enemy.getStats().get(Stats.HP));
+    }
+
+    /**
+     * Esta función permite intentar huir de un combate.
+     * <p>
+     * **IMPORTANTE**: Esta función se llama desde la clase FleeButton.
+     */
+    public void tryToFlee() {
+
+        // Si el jugador logra huir
+        if (player.tryToFlee()) {
+            // Añadimos un mensaje al textDisplay de que se logró huir
+            appendText("Has huido con éxito, tío.\n");
+            // Creamos un nuevo enemigo
+            createEnemy();
+        } else {
+            // Añadimos un mensaje al textDisplay de que no se pudo huir
+            appendText("No has podido huir.\n");
+            // El enemigo ataca al jugador
+            appendText(enemy.attack(player));
+        }
+        // Actualizamos las barras status del jugador y del enemigo
+        updateBars();
     }
 
 }

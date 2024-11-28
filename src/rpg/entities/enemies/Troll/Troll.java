@@ -15,9 +15,9 @@ public class Troll extends Enemy {
     /**
      * Agregar constructor para Troll
      */
-    public Troll(String name) {
+    public Troll() {
 
-        super(name,"Troll");
+        super("Troll");
         ImageCache.addImage("Troll", "Enemies/troll.png");
     }
 
@@ -107,6 +107,6 @@ public class Troll extends Enemy {
     @Override
     public ImageIcon getSprite() {
 
-        return ImageCache.getImageIcon("troll");
+        return ImageCache.getImageIcon("Troll");
     }
 }

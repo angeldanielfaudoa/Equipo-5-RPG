@@ -13,13 +13,5 @@ public class BaseButton extends JButton {
 
         setText(text);
         setUI(new HoverButtonUI());
-        addActionListener(new ActionListener() {
-
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(getText());
-            }
-        });
     }
 }

@@ -15,10 +15,10 @@ public class Skeleton extends Enemy {
      * Agregar constructor para Skeleton
      */
 
-    public Skeleton(String name) {
+    public Skeleton() {
 
-        super(name, "Skeleton");
-        ImageCache.addImage("Orc", "Enemies/skeleton.png");
+        super("Skeleton");
+        ImageCache.addImage("Skeleton", "Enemies/skeleton.png");
     }
 
     @Override
@@ -107,6 +107,6 @@ public class Skeleton extends Enemy {
     @Override
     public ImageIcon getSprite() {
 
-        return ImageCache.getImageIcon("skeleton");
+        return ImageCache.getImageIcon("Skeleton");
     }
 }

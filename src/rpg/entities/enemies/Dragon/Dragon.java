@@ -16,9 +16,9 @@ public class Dragon extends Enemy {
      * Agregar constructor para Dragon
      */
 
-    public Dragon(String name) {
-            super(name,"Dragon Imponente");
-            ImageCache.addImage("Dragón", "Enemies/dragon.png");
+    public Dragon() {
+            super("Dragon Imponente");
+            ImageCache.addImage("Dragon", "Enemies/dragon.png");
         }
 
     @Override
@@ -108,7 +108,7 @@ public class Dragon extends Enemy {
     @Override
     public ImageIcon getSprite() {
 
-        return ImageCache.getImageIcon("dragon");
+        return ImageCache.getImageIcon("Dragon");
     }
     }
 
