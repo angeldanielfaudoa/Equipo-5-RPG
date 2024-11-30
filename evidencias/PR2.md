@@ -18,14 +18,19 @@ GRUPO:
 DOCENTE:
 CASTRO MAGAÑA JESUS AURELIO
 
-Botones, imagen de Personaje 
+Pantlla de Carga
 
-![img_11.png](img_11.png)
+![img.png](img.png)
 
-Barra de Vida 
+Juego Cargado
 
-![img_12.png](img_12.png)
+![img_1.png](img_1.png)
 
-Completado 
+El jugador Atacando
 
-![img_13.png](img_13.png)
+![img_2.png](img_2.png)
+
+Botón de Huir Funcional
+
+![img_3.png](img_3.png)
+
