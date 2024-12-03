@@ -16,6 +16,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * MainWindow es la ventana principal del juego RPG, que contiene la interfaz gráfica de usuario (UI) y la lógica del juego.
+ * Controla la interacción entre el jugador, el enemigo y los componentes de la UI como las barras de vida, botones, y texto.
+ */
 public class MainWindow extends JFrame {
 
     private JPanel mainPanel;
@@ -43,10 +47,13 @@ public class MainWindow extends JFrame {
     private JLabel enemySprite;
     private JButton button4;
 
-    Player player;
-    Enemy enemy;
-    int slot;
+    private Player player;
+    private Enemy enemy;
+    private int slot;
 
+    /**
+     * Constructor de MainWindow. Inicializa la ventana principal con el jugador y el slot proporcionados.
+     */
     public MainWindow(Player player, int slot) {
 
         this.player = player;
@@ -55,51 +62,28 @@ public class MainWindow extends JFrame {
         ((BarLabel) LifeLabel).updateBar(player.getStats().get(Stats.HP), player.getStats().get(Stats.MAX_HP));
         ((BarLabel) MagicLabel).updateBar(player.getStats().get(Stats.MP), player.getStats().get(Stats.MAX_MP));
         ((BarLabel) ExpLabel).updateBar(player.getStats().get(Stats.EXPERIENCE), player.getStats().get(Stats.NEEDED_EXPERIENCE));
-        //statusFrame = new StatusFrame(this);
-        //inventoryFrame = new InventoryFrame(this);
-        //desktopPane.add(statusFrame, JLayeredPane.PALETTE_LAYER);
-       // desktopPane.add(inventoryFrame, JLayeredPane.PALETTE_LAYER);
-        // Colocamos los InternalFrames en la posición deseada
-       // statusFrame.setLocation((desktopPane.getWidth() - statusFrame.getWidth()) / 2,
-         //       (desktopPane.getHeight() - statusFrame.getHeight()) / 2);
-       // inventoryFrame.setLocation((desktopPane.getWidth() - inventoryFrame.getWidth()) / 2,
-             //   (desktopPane.getHeight() - inventoryFrame.getHeight()) / 2);
-        // Añadimos un mensaje al textDisplay de bienvenida
     }
 
+    /**
+     * Inicializa todos los componentes de la ventana principal.
+     */
     private void initComponents() {
-        // Creamos un DesktopPane para poder agregar los componentes
         desktopPane = new JDesktopPane();
-        // Hacemos que el tamaño del DesktopPane sea igual al
-        // tamaño del panel principal
-        desktopPane.setPreferredSize(mainPanel != null ?
-                mainPanel.getPreferredSize() : null);
-        // Definimos los Bounds del panel principal
-        mainPanel.setBounds(0, 0, mainPanel.getPreferredSize().width,
-                mainPanel.getPreferredSize().height);
-        // Agregamos el panel principal al DesktopPane
+        desktopPane.setPreferredSize(mainPanel != null ? mainPanel.getPreferredSize() : null);
+        mainPanel.setBounds(0, 0, mainPanel.getPreferredSize().width, mainPanel.getPreferredSize().height);
         desktopPane.add(mainPanel, JLayeredPane.DEFAULT_LAYER);
-        // Agregamos el panel principal a la ventana
         setContentPane(desktopPane);
-        // Definimos el título de la ventana
+
         setTitle("RPG Game");
-        // Definimos la operación por defecto al cerrar la ventana
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Tomamos el tamaño de los componentes
         pack();
-        // Centramos la ventana
         setLocationRelativeTo(null);
-        // Hacemos visible la ventana
         setVisible(true);
-        // Definimos que la ventana no se pueda redimensionar
         setResizable(false);
 
-        // Acciones previas en el panel
         textScroll.getViewport().setOpaque(false);
-        textScroll.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        textScroll.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        textScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        textScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         textDisplay.setFont(WindowConstants.FONT.deriveFont(22f));
         textDisplay.setBorder(new EmptyBorder(10, 10, 10, 10));
         textDisplay.setForeground(Color.BLACK);
@@ -110,49 +94,41 @@ public class MainWindow extends JFrame {
         appendText("Aparece un nuevo enemigo: " + enemy.getName() + "\n");
     }
 
+    /**
+     * Añade texto al área de texto de la UI.
+     */
     public void appendText(String text) {
-        // Añadimos el texto al textDisplay
         textDisplay.append(text);
-        // Hacemos que el textDisplay se posicione en la última línea
         textDisplay.setCaretPosition(textDisplay.getDocument().getLength());
     }
 
+    /**
+     * Crea los componentes de la interfaz de usuario, como paneles, botones y etiquetas.
+     */
     private void createUIComponents() {
         enemy = EnemyFactory.getEnemy();
-        System.out.println(enemy.getName());
-        // Paneles principales
         topPanel = new TopPanel();
         middlePanel = new MiddlePanel();
         bottomPanel = new BottomPanel();
 
-        // Botones
-        button1=new SaveButton(this, player, slot);
-        button2=new BaseButton("Inventario");
-        button3=new BaseButton("Tienda");
-        button4=new ExitButton();
+        button1 = new SaveButton(this, player, slot);
+        button2 = new BaseButton("Inventario");
+        button3 = new BaseButton("Tienda");
+        button4 = new ExitButton();
 
-
-        // Botones adicionales en español
         Atacar = new Atacar(this);
         Huir = new FleeButton(this);
         Skills = new BaseButton("Skills");
 
-
-        // Etiqueta adicional
         portraitLabel = new PortraitLabel();
 
-
-        // Otros componentes de la interfaz
         LifeLabel = new BarLabel(100, 100, BarType.LIFE);
         MagicLabel = new BarLabel(30, 100, BarType.MAGIC);
         ExpLabel = new BarLabel(100, 100, BarType.EXPERIENCE);
 
-
         goldLabel = new GoldLabel();
         nameLabel = new NameLabel("Andrew LVL. 1");
 
-        // Componentes del enemigo
-        portraitLabel = new PortraitLabel();
         playerSprite = new PlayerSpriteLabel();
         enemyNameLabel = new NameLabel(enemy.getName());
         enemyLifeLabel = new BarLabel(100, 100, BarType.LIFE);
@@ -167,108 +143,93 @@ public class MainWindow extends JFrame {
         return enemy;
     }
 
+    /**
+     * Verifica el estado del juego y determina si el jugador o el enemigo han muerto.
+     */
     public void checkGameStatus() {
-
-        // Verificamos si el jugador o el enemigo han muerto
         if (!player.isAlive()) {
-            // En caso de que el jugador haya muerto
-            // Añadimos un mensaje al textDisplay de que el jugador ha muerto
             appendText("Has muerto.\n");
             appendText("GAME OVER\n");
         } else if (!enemy.isAlive()) {
-            // En caso de que el enemigo haya muerto
-            // Recuperamos la experiencia y el oro del jugador y del enemigo
             int playerExp = player.getStats().get(Stats.EXPERIENCE);
             int enemyExp = enemy.getStats().get(Stats.EXPERIENCE);
             int promotionExp = player.getStats().get(Stats.NEEDED_EXPERIENCE);
             int playerGold = player.getStats().get(Stats.GOLD);
             int enemyGold = enemy.getStats().get(Stats.GOLD);
-            // Calculamos el total de experiencia y oro
+
             int totalExp = playerExp + enemyExp;
             int totalGold = playerGold + enemyGold;
-            // Añadimos un mensaje al textDisplay de que se ha derrotado al enemigo
-            // y se ha ganado experiencia y oro.
             appendText("""
                     Has derrotado a %s
                     Has ganado %d puntos de experiencia.
                     Has ganado %d monedas de oro.
                     """.formatted(enemy.getName(), enemyExp, enemyGold));
-            // Asignamos la nueva experiencia y oro al jugador
+
             player.getStats().put(Stats.EXPERIENCE, totalExp);
             player.getStats().put(Stats.GOLD, totalGold);
             goldLabel.setText(totalGold + "G");
             goldLabel.repaint();
-            // Evaluamos si el jugador ha subido de nivel
-            if (totalExp >= promotionExp)
+
+            if (totalExp >= promotionExp) {
                 updatePlayer();
-            // Creamos un nuevo enemigo en cualquier caso
+            }
             createEnemy();
         }
         updateBars();
     }
 
+    /**
+     * Actualiza el nivel y las barras de estado del jugador.
+     */
     private void updatePlayer() {
-
-        // Actualizamos al jugador
         player.levelUp();
-        // Obtenemos el nivel, vida, magia y experiencia del jugador
         int level = player.getStats().get(Stats.LEVEL);
         int hp = player.getStats().get(Stats.HP);
         int mp = player.getStats().get(Stats.MP);
         int neededExp = player.getStats().get(Stats.NEEDED_EXPERIENCE);
-        // Añadimos un mensaje al textDisplay de que el jugador ha subido de nivel
+
         appendText("Has subido de nivel.\n");
-        // Actualizamos las barras de estado del jugador
         ((BarLabel) LifeLabel).updateBar(hp, hp);
         ((BarLabel) MagicLabel).updateBar(mp, mp);
         ((BarLabel) ExpLabel).updateBar(0, neededExp);
-        // Actualizamos el nombre del jugador
-        ((NameLabel) nameLabel).updateLabel(
-                "%s LVL. %d".formatted(player.getName(), level));
+
+        ((NameLabel) nameLabel).updateLabel("%s LVL. %d".formatted(player.getName(), level));
     }
 
+    /**
+     * Crea un nuevo enemigo para el combate.
+     */
     private void createEnemy() {
-
         enemy = EnemyFactory.getEnemy();
         if (enemy != null) {
-
             enemyNameLabel.setText(enemy.getName());
             appendText("Aparece un nuevo enemigo: " + enemy.getName() + "\n");
             ((EnemySpriteLabel) enemySprite).setEnemy(enemy);
             ((NameLabel) enemyNameLabel).updateLabel(enemy.getName());
-            ((BarLabel) enemyLifeLabel).updateBar(enemy.getStats().get(Stats.HP),
-                    enemy.getStats().get(Stats.MAX_HP));
+            ((BarLabel) enemyLifeLabel).updateBar(enemy.getStats().get(Stats.HP), enemy.getStats().get(Stats.MAX_HP));
         }
     }
 
+    /**
+     * Actualiza las barras de vida y experiencia del jugador y el enemigo.
+     */
     private void updateBars() {
-
         ((BarLabel) LifeLabel).setBarValue(player.getStats().get(Stats.HP));
         ((BarLabel) ExpLabel).setBarValue(player.getStats().get(Stats.EXPERIENCE));
         ((BarLabel) enemyLifeLabel).setBarValue(enemy.getStats().get(Stats.HP));
     }
 
     /**
-     * Esta función permite intentar huir de un combate.
-     * <p>
-     * **IMPORTANTE**: Esta función se llama desde la clase FleeButton.
+     * Intenta que el jugador huya del combate.
      */
     public void tryToFlee() {
-
-        // Si el jugador logra huir
         if (player.tryToFlee()) {
-            // Añadimos un mensaje al textDisplay de que se logró huir
             appendText("Has huido con éxito, tío.\n");
-            // Creamos un nuevo enemigo
             createEnemy();
         } else {
-            // Añadimos un mensaje al textDisplay de que no se pudo huir
             appendText("No has podido huir.\n");
-            // El enemigo ataca al jugador
             appendText(enemy.attack(player));
         }
-        // Actualizamos las barras status del jugador y del enemigo
         updateBars();
     }
-
 }

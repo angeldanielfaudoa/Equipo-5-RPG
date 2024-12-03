@@ -1,21 +1,21 @@
 package rpg.entities;
 
-import rpg.enums.Stats;
-import rpg.enums.WearType;
-import rpg.exceptions.ItemNotFoundException;
-import rpg.inventory.Inventory;
-import rpg.items.Equipment;
-import rpg.items.Item;
-import rpg.items.Miscs.Misc;
-import rpg.items.weapons.Weapon;
-import rpg.utils.cache.Randomized;
+import rpg.enums.Stats;  // Importa las estadísticas del personaje (HP, MP, etc.)
+import rpg.enums.WearType;  // Importa los tipos de equipo que el personaje puede usar
+import rpg.exceptions.ItemNotFoundException;  // Importa la excepción que se lanza cuando un objeto no se encuentra en el inventario
+import rpg.inventory.Inventory;  // Importa la clase que maneja el inventario del personaje
+import rpg.items.Equipment;  // Importa la clase base para los objetos equipables
+import rpg.items.Item;  // Importa la clase base para todos los objetos
+import rpg.items.Miscs.Misc;  // Importa la clase que representa objetos misceláneos
+import rpg.items.weapons.Weapon;  // Importa la clase que representa armas
+import rpg.utils.cache.Randomized;  // Importa una clase que genera valores aleatorios
 
-import javax.swing.*;
-import java.io.*;
-import java.util.HashMap;
+import javax.swing.*;  // Importa componentes gráficos para mostrar diálogos
+import java.io.*;  // Importa clases para manejo de archivos y flujo de datos
+import java.util.HashMap;  // Importa la clase HashMap para almacenar pares clave-valor
 
 /**
- * The type Player.
+ * El tipo de Jugador.
  */
 public class Player extends GameCharacter implements Serializable {
 
@@ -23,9 +23,9 @@ public class Player extends GameCharacter implements Serializable {
     private HashMap<WearType, Equipment> equipment;
 
     /**
-     * Instantiates a new Player.
+     * Constructor que crea un nuevo jugador con el nombre especificado.
      *
-     * @param name the name
+     * @param name el nombre del jugador
      */
     public Player(String name) {
 
@@ -33,6 +33,11 @@ public class Player extends GameCharacter implements Serializable {
         inventory = new Inventory();
     }
 
+    /**
+     * Guarda el estado actual del jugador en un archivo de guardado.
+     *
+     * @param slot la ranura de guardado (número de archivo)
+     */
     public void save(int slot) {
 
         try {
@@ -45,6 +50,12 @@ public class Player extends GameCharacter implements Serializable {
         }
     }
 
+    /**
+     * Carga el estado del jugador desde un archivo de guardado.
+     *
+     * @param slot la ranura de guardado (número de archivo)
+     * @return el objeto Player cargado o null si ocurre un error
+     */
     public static Player load(int slot) {
 
         try {
@@ -59,11 +70,18 @@ public class Player extends GameCharacter implements Serializable {
         return null;
     }
 
+    /**
+     * Intenta escapar de una batalla.
+     *
+     * @return true si logra escapar, false en caso contrario
+     */
     public boolean tryToFlee() {
 
         return Randomized.getRandomBoolean();
     }
-
+    /**
+     * Aumenta el nivel del jugador y mejora sus estadísticas.
+     */
     public void levelUp() {
 
         stats.put(Stats.LEVEL, stats.get(Stats.LEVEL) + 1);
@@ -103,6 +121,11 @@ public class Player extends GameCharacter implements Serializable {
         equipment.put(WearType.WEAPON, null);
     }
 
+    /**
+     * Añade un objeto al inventario del jugador.
+     *
+     * @param item el objeto a añadir
+     */
     public void addItemToInventory(Item item) {
 
         if (item instanceof Misc misc) {
@@ -128,6 +151,11 @@ public class Player extends GameCharacter implements Serializable {
         }
     }
 
+    /**
+     * Elimina un objeto del inventario del jugador.
+     *
+     * @param item el objeto a eliminar
+     */
     public void removeItemFromInventory(Item item) {
 
         if (item instanceof Misc misc) {
@@ -149,6 +177,11 @@ public class Player extends GameCharacter implements Serializable {
         }
     }
 
+    /**
+     * Vende un objeto del inventario del jugador.
+     *
+     * @param item el objeto a vender
+     */
     public void sellItem(Item item) {
 
         try {
@@ -169,6 +202,9 @@ public class Player extends GameCharacter implements Serializable {
         }
     }
 
+    /**
+     * Muestra el contenido del inventario en un cuadro de diálogo.
+     */
     public void showInventory() {
 
         StringBuilder content = new StringBuilder("Inventory: \n");
@@ -180,25 +216,30 @@ public class Player extends GameCharacter implements Serializable {
                 Name: %s, Price: %d, Quantity: %d
                 Description: %s
                 """;
+        // Itera sobre todos los objetos del inventario
         for (Item item : inventory.getItems()) {
-
-            if (item instanceof Misc misc) {
-                if (misc.isStackable()) {
+            if (item instanceof Misc misc) {  // Si es un objeto misceláneo
+                if (misc.isStackable()) {  // Si es apilable
                     content.append(String.format(formatQuantity, item.getName(),
-                            item.getPrice(), misc.getQuantity(), item.getDescription()));
+                            item.getPrice(), misc.getQuantity(), item.getDescription()));  // Añade el objeto con su cantidad
                 } else {
                     content.append(String.format(format, item.getName(), item.getPrice(),
-                            item.getDescription()));
+                            item.getDescription()));  // Añade el objeto sin cantidad
                 }
             } else {
                 content.append(String.format(format, item.getName(), item.getPrice(),
-                        item.getDescription()));
+                        item.getDescription()));  // Añade otros tipos de objetos
             }
         }
-        JOptionPane.showMessageDialog(null, content.toString());
+        JOptionPane.showMessageDialog(null, content.toString());  // Muestra el contenido del inventario en un cuadro de diálogo
     }
 
+    /**
+     * Obtiene el inventario del jugador.
+     *
+     * @return el inventario del jugador
+     */
     public Inventory getInventory() {
-        return inventory;
+        return inventory;  // Retorna el objeto Inventory del jugador
     }
 }
